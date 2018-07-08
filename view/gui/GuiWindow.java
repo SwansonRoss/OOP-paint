@@ -1,5 +1,6 @@
 package view.gui;
 
+import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -12,6 +13,8 @@ import view.EventName;
 
 import java.awt.*;
 
+import view.gui.ClickHandler;
+
 public class GuiWindow extends JFrame implements IGuiWindow {
     private final int defaultWidth = 1200;
     private final int defaultHeight = 800;
@@ -22,6 +25,7 @@ public class GuiWindow extends JFrame implements IGuiWindow {
     private final PaintCanvas canvas;
 
     public GuiWindow(PaintCanvas canvas){
+        MouseListener ml = new ClickHandler();
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle(defaultTitle);
@@ -29,6 +33,7 @@ public class GuiWindow extends JFrame implements IGuiWindow {
         JPanel window = createWindow();
         this.canvas = canvas;
         window.add(canvas, BorderLayout.CENTER);
+        window.addMouseListener(ml);
 		validate();
     }
 

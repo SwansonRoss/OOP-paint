@@ -1,4 +1,4 @@
-package model.persistence;
+package model;
 
 import model.ShapeColor;
 import model.interfaces.IShape;
@@ -15,6 +15,13 @@ public class Triangle implements IShape {
     private Point endPoint;
     private ShapeColor bodyColor;
     private ShapeColor borderColor;
+
+    Triangle(Point start, Point end, ShapeColor body, ShapeColor border){
+        this.startPoint = start;
+        this.endPoint = end;
+        this.bodyColor = body;
+        this.borderColor = border;
+    }
 
     @Override
     public void setStart() {

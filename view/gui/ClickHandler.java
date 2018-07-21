@@ -1,10 +1,8 @@
 package view.gui;
 
-import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Point;
-import java.net.PortUnreachableException;
 
 public class ClickHandler extends MouseAdapter{
     private Point startPoint = new Point();

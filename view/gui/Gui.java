@@ -34,4 +34,5 @@ public class Gui implements IUiModule {
                 ? (T)dialogSettings.getCurrentSelection()
                 : (T)selectedValue;
     }
+
 }

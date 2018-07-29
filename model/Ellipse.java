@@ -5,33 +5,31 @@ import model.interfaces.IShape;
 import java.awt.*;
 import view.gui.ClickHandler;
 
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
+public class Ellipse implements IShape {
 
-public class ellipse implements IShape {
-
-    private ClickHandler ch = new ClickHandler();
+    //private ClickHandler ch = new ClickHandler();
 
     private Point startPoint;
     private Point endPoint;
     private ShapeColor bodyColor;
     private ShapeColor borderColor;
 
-    ellipse(Point start, Point end, ShapeColor body, ShapeColor border){
+    Ellipse(Point start, Point end, ShapeColor body, ShapeColor border){
         this.startPoint = start;
         this.endPoint = end;
         this.bodyColor = body;
         this.borderColor = border;
+        System.out.println("An ellipse has been made");
     }
 
     @Override
     public void setStart() {
-        startPoint = ch.getStart();
+        //startPoint = ch.getStart();
     }
 
     @Override
     public void setEnd() {
-        endPoint = ch.getEnd();
+        //endPoint = ch.getEnd();
     }
 
         @Override
@@ -47,7 +45,7 @@ public class ellipse implements IShape {
     }
 
     @Override
-    public void addToList(ArrayList<IShape> list) {
+    public void addToList(shapeList list) {
         list.add(this);
     }
 }

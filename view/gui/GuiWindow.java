@@ -13,8 +13,6 @@ import view.EventName;
 
 import java.awt.*;
 
-import view.gui.ClickHandler;
-
 public class GuiWindow extends JFrame implements IGuiWindow {
     private final int defaultWidth = 1200;
     private final int defaultHeight = 800;
@@ -25,7 +23,6 @@ public class GuiWindow extends JFrame implements IGuiWindow {
     private final PaintCanvas canvas;
 
     public GuiWindow(PaintCanvas canvas){
-        MouseListener ml = new ClickHandler();
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle(defaultTitle);
@@ -33,6 +30,7 @@ public class GuiWindow extends JFrame implements IGuiWindow {
         JPanel window = createWindow();
         this.canvas = canvas;
         window.add(canvas, BorderLayout.CENTER);
+        MouseListener ml = new ClickHandler(canvas);
         window.addMouseListener(ml);
 		validate();
     }
@@ -98,4 +96,5 @@ public class GuiWindow extends JFrame implements IGuiWindow {
         setContentPane(contentPane);
         return contentPane;
     }
+
 }

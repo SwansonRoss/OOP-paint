@@ -8,7 +8,7 @@ public class ShapeFactory {
         private ShapeFactory() {}
 
         public static IShape createEllipse(Point start, Point end, ShapeColor body, ShapeColor border) {
-            return new ellipse(start, end, body, border);
+            return new Ellipse(start, end, body, border);
         }
 
         public static IShape createRectangle(Point start, Point end, ShapeColor body, ShapeColor border) {

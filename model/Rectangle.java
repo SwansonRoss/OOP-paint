@@ -1,14 +1,12 @@
 package model;
 
 import model.interfaces.IShape;
-import model.persistence.ApplicationState;
 import view.gui.ClickHandler;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Rectangle implements IShape {
-    private ClickHandler ch = new ClickHandler();
+    //private ClickHandler ch = new ClickHandler();
 
     private Point startPoint;
     private Point endPoint;
@@ -25,13 +23,13 @@ public class Rectangle implements IShape {
 
     @Override
     public void setStart() {
-        startPoint = ch.getStart();
+        //startPoint = ch.getStart();
 
     }
 
     @Override
     public void setEnd() {
-        endPoint = ch.getEnd();
+        //endPoint = ch.getEnd();
     }
 
     @Override
@@ -45,7 +43,12 @@ public class Rectangle implements IShape {
     }
 
     @Override
-    public void addToList(ArrayList<IShape> list) {
+    public void addToList(shapeList list) {
         list.add(this);
     }
+
+//    @Override
+//    public void draw() {
+//        return;
+//    }
 }

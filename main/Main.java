@@ -5,11 +5,15 @@ import controller.JPaintController;
 import model.dialogs.DialogProvider;
 import model.interfaces.IDialogProvider;
 import model.persistence.ApplicationState;
+import view.gui.ClickHandler;
 import view.gui.Gui;
 import view.gui.GuiWindow;
 import view.gui.PaintCanvas;
 import view.interfaces.IGuiWindow;
 import view.interfaces.IUiModule;
+
+import java.awt.*;
+import java.awt.event.MouseListener;
 
 public class Main {
     public static void main(String[] args){
@@ -18,5 +22,6 @@ public class Main {
         ApplicationState appState = new ApplicationState(uiModule);
         IJPaintController controller = new JPaintController(uiModule, appState);
         controller.setup();
+
     }
 }

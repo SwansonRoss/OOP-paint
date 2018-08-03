@@ -8,6 +8,7 @@ import java.util.NoSuchElementException;
 import javax.swing.*;
 import javax.swing.border.*;
 
+import model.persistence.ApplicationState;
 import view.interfaces.IGuiWindow;
 import view.EventName;
 
@@ -20,18 +21,21 @@ public class GuiWindow extends JFrame implements IGuiWindow {
     private final Insets defaultButtonDimensions 
     	= new Insets(5, 8, 5, 8);
     private final Map<EventName, JButton> eventButtons = new HashMap<>();
-    private final PaintCanvas canvas;
+    private PaintCanvas canvas = null;
+    private ApplicationState appState;
+    private MouseListener ml;
+    private JPanel window;
 
     public GuiWindow(PaintCanvas canvas){
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle(defaultTitle);
         setSize(defaultWidth, defaultHeight);
-        JPanel window = createWindow();
+        window = createWindow();
         this.canvas = canvas;
         window.add(canvas, BorderLayout.CENTER);
-        MouseListener ml = new ClickHandler(canvas);
-        window.addMouseListener(ml);
+//        ml = new ClickHandler(canvas);
+//        window.addMouseListener(ml);
 		validate();
     }
 
@@ -95,6 +99,19 @@ public class GuiWindow extends JFrame implements IGuiWindow {
         contentPane.setBackground(Color.WHITE);
         setContentPane(contentPane);
         return contentPane;
+    }
+
+    public void setAppState(ApplicationState as){
+        this.appState = as;
+    }
+
+    public void setMouseListener(MouseListener ml){
+        this.ml = ml;
+        this.window.addMouseListener(ml);
+    }
+
+    public PaintCanvas getCanvas(){
+        return this.canvas;
     }
 
 }

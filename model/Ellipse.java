@@ -4,6 +4,7 @@ import model.interfaces.IShape;
 
 import java.awt.*;
 import view.gui.ClickHandler;
+import view.gui.PaintCanvas;
 
 public class Ellipse implements IShape {
 
@@ -11,15 +12,20 @@ public class Ellipse implements IShape {
 
     private Point startPoint;
     private Point endPoint;
+    private int width;
+    private int height;
     private ShapeColor bodyColor;
     private ShapeColor borderColor;
+    private ShapeType type;
 
-    Ellipse(Point start, Point end, ShapeColor body, ShapeColor border){
+    public Ellipse(Point start, Point end, ShapeColor body, ShapeColor border){
         this.startPoint = start;
         this.endPoint = end;
+        this.width = endPoint.x - startPoint.x;
+        this.height = endPoint.y - startPoint.y;
         this.bodyColor = body;
         this.borderColor = border;
-        System.out.println("An ellipse has been made");
+        this.type = ShapeType.ELLIPSE;
     }
 
     @Override
@@ -47,5 +53,21 @@ public class Ellipse implements IShape {
     @Override
     public void addToList(shapeList list) {
         list.add(this);
+    }
+
+    @Override
+    public void draw(PaintCanvas canvas){
+        Graphics2D g = canvas.getGraphics2D();
+        g.drawOval(startPoint.x, startPoint.y, width, height);
+    }
+
+    @Override
+    public Point getStart(){
+        return startPoint;
+    }
+
+    @Override
+    public Point getEnd(){
+        return endPoint;
     }
 }

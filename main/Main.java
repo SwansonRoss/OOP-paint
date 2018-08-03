@@ -20,8 +20,11 @@ public class Main {
         IGuiWindow guiWindow = new GuiWindow(new PaintCanvas());
         IUiModule uiModule = new Gui(guiWindow);
         ApplicationState appState = new ApplicationState(uiModule);
+        ((GuiWindow) guiWindow).setAppState(appState);
         IJPaintController controller = new JPaintController(uiModule, appState);
         controller.setup();
+        MouseListener ml = new ClickHandler(((GuiWindow) guiWindow).getCanvas(), appState);
+        ((GuiWindow) guiWindow).setMouseListener(ml);
 
     }
 }

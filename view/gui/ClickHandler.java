@@ -1,5 +1,11 @@
 package view.gui;
 
+import model.determineShapeStrategy;
+import model.interfaces.IShape;
+import model.interfaces.IShapeStrategy;
+import model.persistence.ApplicationState;
+import model.shapeList;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -19,9 +25,15 @@ public class ClickHandler extends MouseAdapter{
     private Point startPoint = new Point();
     private Point endPoint = new Point();
     private PaintCanvas canvas = null;
+    private shapeList list = new shapeList();
+    private GuiWindow window = null;
+    private ApplicationState appState = null;
 
-    public ClickHandler(PaintCanvas canvas){
+    public ClickHandler(PaintCanvas canvas, ApplicationState appState){
+
         this.canvas = canvas;
+        this.appState = appState;
+        list.setCanvas(canvas);
     }
 
     @Override
@@ -35,41 +47,20 @@ public class ClickHandler extends MouseAdapter{
         super.mouseReleased(e);
         endPoint = e.getPoint();
 
-        System.out.println("Old end point: " + endPoint);
-        System.out.println("Old start point: "+ startPoint);
+//        canvas.setShape(startPoint, endPoint);
+//        canvas.paint(null);
 
-        Point end = getEnd();
-        Point start = getStart();
-
-        System.out.println("New end point: " + end);
-        System.out.println("New start point: "+ start);
-
-        canvas.setShape(start.x, start.y, end.x-start.x, end.y-start.y);
-        canvas.paint(null);
+        addShapeToList(startPoint, endPoint, canvas, appState, list);
     }
 
-    public Point getStart() {
-        return getStartPoint();
-    }
+    public void addShapeToList(Point start, Point end, PaintCanvas canvas, ApplicationState as, shapeList list){
+        determineShapeStrategy findStrategy = new determineShapeStrategy(as);
+        IShapeStrategy strategy = findStrategy.determineShape();
+        IShape shape = strategy.getShapeStrategy(start, end, as);
+        shape.addToList(list);
+        list.drawShapes();
 
-    private Point getStartPoint() {
-        int x = Math.min(startPoint.x, endPoint.x);
-        int y = Math.min(startPoint.y, endPoint.y);
-        Point start = new Point();
-        start.setLocation(x, y);
-        return start;
-    }
-
-    public Point getEnd() {
-        return getEndPoint();
-    }
-
-    private Point getEndPoint() {
-        Point end = new Point();
-        int x = Math.max(startPoint.x, endPoint.x);
-        int y = Math.max(startPoint.y, endPoint.y);
-        end.setLocation(x, y);
-        return end;
+        System.out.println("A " + shape.toString() + "was just created. There are " + list.size() + "shapes in total");
     }
 
 }

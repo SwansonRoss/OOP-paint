@@ -1,6 +1,9 @@
 package model.interfaces;
 
 import model.shapeList;
+import view.gui.PaintCanvas;
+
+import java.awt.*;
 
 public interface IShape {
     void setStart();
@@ -8,6 +11,8 @@ public interface IShape {
     void setBodyColor();
     void setBorderColor();
     void addToList(shapeList list);
-    //void draw();
+    void draw(PaintCanvas canvas);
+    Point getStart();
+    Point getEnd();
 
 }

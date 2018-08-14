@@ -2,6 +2,7 @@ package model;
 
 import model.interfaces.IShape;
 import model.persistence.ApplicationState;
+import java.awt.Color;
 
 import java.awt.Point;
 
@@ -13,15 +14,15 @@ public class ShapeFactory {
         this.appState = as;
     }
 
-    public static IShape createEllipse(Point start, Point end, ShapeColor body, ShapeColor border) {
-        return new Ellipse(start, end, body, border);
+    public static IShape createEllipse(Point start, Point end, Color body, Color border, int fillKey) {
+        return new Ellipse(start, end, body, border, fillKey);
     }
 
-    public static IShape createRectangle(Point start, Point end, ShapeColor body, ShapeColor border) {
-        return new Rectangle(start, end, body, border);
+    public static IShape createRectangle(Point start, Point end, Color body, Color border, int fillKey) {
+        return new Rectangle(start, end, body, border, fillKey);
     }
 
-    public static  IShape createTriangle(Point start, Point end, ShapeColor body, ShapeColor border) {
-        return new Triangle(start, end, body, border);
+    public static  IShape createTriangle(Point start, Point end, Color body, Color border, int fillKey) {
+        return new Triangle(start, end, body, border, fillKey);
     }
 }

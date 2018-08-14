@@ -1,9 +1,6 @@
 package model.interfaces;
 
-import model.ShapeColor;
-import model.ShapeShadingType;
-import model.ShapeType;
-import model.StartAndEndPointMode;
+import model.*;
 
 public interface IApplicationState {
     void setActiveShape();
@@ -25,4 +22,14 @@ public interface IApplicationState {
     ShapeShadingType getActiveShapeShadingType();
 
     StartAndEndPointMode getActiveStartAndEndPointMode();
+
+    void copy();
+
+    void paste();
+
+    void deleteSelected();
+
+    void undoEvent();
+
+    void redoEvent();
 }

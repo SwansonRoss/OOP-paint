@@ -1,6 +1,8 @@
 package view.gui;
 
+import model.determineClickStrategy;
 import model.determineShapeStrategy;
+import model.interfaces.IClick;
 import model.interfaces.IShape;
 import model.interfaces.IShapeStrategy;
 import model.persistence.ApplicationState;
@@ -34,6 +36,7 @@ public class ClickHandler extends MouseAdapter{
         this.canvas = canvas;
         this.appState = appState;
         list.setCanvas(canvas);
+        appState.setShapeList(list);
     }
 
     @Override
@@ -47,20 +50,8 @@ public class ClickHandler extends MouseAdapter{
         super.mouseReleased(e);
         endPoint = e.getPoint();
 
-//        canvas.setShape(startPoint, endPoint);
-//        canvas.paint(null);
-
-        addShapeToList(startPoint, endPoint, canvas, appState, list);
+        determineClickStrategy findClickMode = new determineClickStrategy(appState);
+        IClick clickMode = findClickMode.getClickStrategy();
+        clickMode.run(startPoint, endPoint, canvas, appState, list);
     }
-
-    public void addShapeToList(Point start, Point end, PaintCanvas canvas, ApplicationState as, shapeList list){
-        determineShapeStrategy findStrategy = new determineShapeStrategy(as);
-        IShapeStrategy strategy = findStrategy.determineShape();
-        IShape shape = strategy.getShapeStrategy(start, end, as);
-        shape.addToList(list);
-        list.drawShapes();
-
-        System.out.println("A " + shape.toString() + "was just created. There are " + list.size() + "shapes in total");
-    }
-
 }

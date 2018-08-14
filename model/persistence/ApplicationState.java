@@ -1,9 +1,6 @@
 package model.persistence;
 
-import model.ShapeColor;
-import model.ShapeShadingType;
-import model.ShapeType;
-import model.StartAndEndPointMode;
+import model.*;
 import model.dialogs.DialogProvider;
 import model.interfaces.IApplicationState;
 import model.interfaces.IDialogProvider;
@@ -18,6 +15,10 @@ public class ApplicationState implements IApplicationState {
     private ShapeColor activeSecondaryColor;
     private ShapeShadingType activeShapeShadingType;
     private StartAndEndPointMode activeStartAndEndPointMode;
+
+    private shapeList list = null;
+
+    private  shapeList copyList = null;
 
     public ApplicationState(IUiModule uiModule) {
         this.uiModule = uiModule;
@@ -82,4 +83,30 @@ public class ApplicationState implements IApplicationState {
         activeShapeShadingType = ShapeShadingType.FILLED_IN;
         activeStartAndEndPointMode = StartAndEndPointMode.DRAW;
     }
+
+    public void setShapeList(shapeList list){
+        this.list = list;
+    }
+
+    @Override
+    public void copy(){
+        this.copyList = list.copySelected();
+    }
+
+    @Override
+    public void paste(){
+        list.paste(this.copyList);
+    }
+
+    @Override
+    public void deleteSelected(){
+        list.deleteShapes();
+    }
+
+    @Override
+    public void undoEvent(){CommandHistory.undo();}
+
+    @Override
+    public void redoEvent(){CommandHistory.redo();}
+
 }

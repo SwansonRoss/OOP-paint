@@ -1,6 +1,7 @@
 package controller;
 
 import model.interfaces.IApplicationState;
+import model.shapeList;
 import view.EventName;
 import view.interfaces.IUiModule;
 
@@ -24,5 +25,10 @@ public class JPaintController implements IJPaintController {
         uiModule.addEvent(EventName.CHOOSE_SECONDARY_COLOR, () -> applicationState.setActiveSecondaryColor());
         uiModule.addEvent(EventName.CHOOSE_SHADING_TYPE, () -> applicationState.setActiveShadingType());
         uiModule.addEvent(EventName.CHOOSE_START_POINT_ENDPOINT_MODE, () -> applicationState.setActiveStartAndEndPointMode());
+        uiModule.addEvent(EventName.COPY, () -> applicationState.copy());
+        uiModule.addEvent(EventName.PASTE, () -> applicationState.paste());
+        uiModule.addEvent(EventName.DELETE, () -> applicationState.deleteSelected());
+        uiModule.addEvent(EventName.UNDO, () -> applicationState.undoEvent());
+        uiModule.addEvent(EventName.REDO, () -> applicationState.redoEvent());
     }
 }

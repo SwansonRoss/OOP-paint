@@ -8,8 +8,8 @@ import view.gui.PaintCanvas;
 import java.awt.*;
 
 public class moveMode implements IClick, IUndoable {
-    private int width;
-    private int height;
+    private int rWidth;
+    private int rHeight;
     private shapeList list = new shapeList();
 
 
@@ -21,10 +21,10 @@ public class moveMode implements IClick, IUndoable {
 
         //find delta width and delta height
         int dWidth = end.x - start.x;
-        this.width = dWidth;
+        this.rWidth = dWidth*-1;
 
         int dHeight = end.y - start.y;
-        this.height = dHeight;
+        this.rHeight = dHeight*-1;
 
         list.moveShapes(dWidth, dHeight);
 
@@ -37,11 +37,11 @@ public class moveMode implements IClick, IUndoable {
 
     @Override
     public void undo() {
-        list.moveShapes(width*-1, height*-1);
+        list.moveShapes(rWidth, rHeight);
     }
 
     @Override
     public void redo() {
-        list.moveShapes(width, height);
+        list.moveShapes(rWidth*-1, rHeight*-1);
     }
 }

@@ -9,13 +9,12 @@ import java.awt.*;
 
 public class rectangleStrategy implements IShapeStrategy {
 
-    private ColorMapSingleton<ShapeColor, Color> colorMapSingleton = new ColorMapSingleton<ShapeColor, Color>(ShapeColor.class);
 
     @Override
     public IShape getShapeStrategy(Point start, Point end, ApplicationState appState) {
 
-        Color primary = colorMapSingleton.get(appState.getActivePrimaryColor());
-        Color secondary = colorMapSingleton.get(appState.getActiveSecondaryColor());
+        Color primary = (Color) ColorMapSingleton.instance.get(appState.getActivePrimaryColor());
+        Color secondary = (Color) ColorMapSingleton.instance.get(appState.getActivePrimaryColor());
 
         determineFillStrategy strategy = new determineFillStrategy(appState);
         IFillType fill = strategy.getFillStrategy();

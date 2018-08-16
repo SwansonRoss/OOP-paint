@@ -38,21 +38,6 @@ public class shapeList extends ArrayList {
 
             System.out.println("Shape box range: " + start.x + ", " + start.y + " to " + end.x + ", " + end.y);
 
-//            if(((start.x > topLeft.x) && (start.x < bottomRight.x)) ||  ((end.x > topLeft.x) && (end.x < bottomRight.x))){
-//                if(((start.y > topLeft.y) && (start.y < bottomRight.y)) ||
-//                        ((end.y > topLeft.y) && (end.y < bottomRight.y))){
-//                            System.out.println("There was a collision!");
-//                            shape.setCollision(true);
-//                }
-//                else {
-//                    shape.setCollision(false);
-//                }
-//
-//            }
-//            else {
-//                shape.setCollision(false);
-//            }
-
             if((br.x < start.x) || (tl.x > end.x) || (tl.y > end.y) || (br.y < start.y)){
                 shape.setCollision(false);
             }

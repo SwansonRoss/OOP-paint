@@ -9,7 +9,6 @@ import java.awt.*;
 
 public class triangleStrategy implements IShapeStrategy{
 
-    private ColorMapSingleton<ShapeColor, Color> colorMapSingleton = new ColorMapSingleton<ShapeColor, Color>(ShapeColor.class);
 
     @Override
     public IShape getShapeStrategy(Point start, Point end, ApplicationState appState) {
@@ -18,8 +17,8 @@ public class triangleStrategy implements IShapeStrategy{
         IFillType fill = strategy.getFillStrategy();
         int fillKey = fill.returnDrawMode();
 
-        Color primary = colorMapSingleton.get(appState.getActivePrimaryColor());
-        Color secondary = colorMapSingleton.get(appState.getActiveSecondaryColor());
+        Color primary = (Color)ColorMapSingleton.instance.get(appState.getActivePrimaryColor());
+        Color secondary = (Color)ColorMapSingleton.instance.get(appState.getActiveSecondaryColor());
 
         return ShapeFactory.createTriangle(start, end, primary, secondary, fillKey);
     }
